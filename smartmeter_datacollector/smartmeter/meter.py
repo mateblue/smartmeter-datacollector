@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # See LICENSES/README.md for more information.
 #
+import logging
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
@@ -12,6 +13,8 @@ from .cosem import Cosem
 from .hdlc_dlms_parser import HdlcDlmsParser
 from .meter_data import MeterDataPoint
 from .serial_reader import SerialConfig, SerialReader
+
+LOGGER = logging.getLogger("meter")
 
 
 class MeterError(Exception):
@@ -59,7 +62,9 @@ class SerialHdlcDlmsMeter(Meter):
         if self._parser.extract_data_from_hdlc_frames():
             dlms_objects = self._parser.parse_to_dlms_objects()
             if not dlms_objects:
+                LOGGER.debug("##########No DLMS Object")
                 return
             message_time = self._parser.extract_message_time()
             data_points = self._parser.convert_dlms_bundle_to_reader_data(dlms_objects, message_time)
+            #LOGGER.debug("DataPoints: %s", data_points[:])
             self._notify_observers(data_points)

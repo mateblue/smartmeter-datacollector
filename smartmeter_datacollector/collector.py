@@ -29,6 +29,7 @@ class Collector:
         for point in reader_data_points:
             try:
                 self._queue.put_nowait(point)
+                # LOGGER.debug("Send %s to queue", point)
             except QueueFull:
                 LOGGER.warning("Queue is full. Current data points are dropped.")
                 return

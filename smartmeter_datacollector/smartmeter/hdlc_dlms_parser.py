@@ -100,6 +100,7 @@ class HdlcDlmsParser:
 
         # pylint: disable=unsubscriptable-object
         if isinstance(self._dlms_data.value[0], list):
+            #LOGGER.debug("data %s ", self._dlms_data.value[0][:])
             # message with included push-object-list as first object
             dlms_objects = self._parse_dlms_with_push_object_list()
         else:
@@ -121,6 +122,7 @@ class HdlcDlmsParser:
                 LOGGER.warning("Skipping unparsable DLMS object. (Reason: %s)", ex)
 
         meter_id = self._cosem.retrieve_id(obis_obj_pairs)
+        #LOGGER.debug("Found meter_id %s ", meter_id)
 
         timestamp = None
         if self._use_system_time:
@@ -140,10 +142,16 @@ class HdlcDlmsParser:
 
         # Extract register data
         data_points: List[MeterDataPoint] = []
-        for obis, obj in filter(lambda o: o[1].getObjectType() == ObjectType.REGISTER, obis_obj_pairs.items()):
+        #LOGGER.debug("obis_obj_pairs.item = %s ", obis_obj_pairs.items())
+        #for obis, obj in filter(lambda o: o[1].getObjectType() == ObjectType.REGISTER, obis_obj_pairs.items()):
+        for obis, obj in obis_obj_pairs.items():
             reg_type = self._cosem.get_register(obis)
-            if reg_type and isinstance(obj, GXDLMSRegister):
-                raw_value = self._extract_register_value(obj)
+            #LOGGER.debug("reg_type = %s", reg_type)
+            #if reg_type and isinstance(obj, GXDLMSRegister):
+            if reg_type:
+                #raw_value = self._extract_register_value(obj)
+                raw_value = obj.getValues()[1]
+                LOGGER.debug("obis, raw_value, obj.value: %s, %s %s", obis, raw_value, obj.getValues()[1])
                 if raw_value is None:
                     LOGGER.warning("No value received for %s.", obis)
                     continue
@@ -154,6 +162,7 @@ class HdlcDlmsParser:
                     LOGGER.warning("Invalid register value '%s'. Skipping register.", str(raw_value))
                     continue
                 data_points.append(MeterDataPoint(data_point_type, value, meter_id, timestamp))
+                LOGGER.debug("data_points(data_point_type, value, meter_id, timestamp) = %s %s %s %s",data_point_type, value, meter_id, timestamp)
         return data_points
 
     def _parse_dlms_with_push_object_list(self) -> List[GXDLMSObject]:
@@ -161,7 +170,7 @@ class HdlcDlmsParser:
         parsed_objects = self._client.parsePushObjects(self._dlms_data.value[0])
         for index, (obj, attr_ind) in enumerate(parsed_objects[1:], start=1):
             self._client.updateValue(obj, attr_ind, self._dlms_data.value[index])
-            LOGGER.debug("%s %s %s: %s", obj.objectType, obj.logicalName, attr_ind, obj.getValues()[attr_ind - 1])
+            LOGGER.debug("With Push list : %s %s %s: %s", obj.objectType, obj.logicalName, attr_ind, obj.getValues()[attr_ind - 1])
 
         return [obj for obj, _ in parsed_objects]
 
@@ -188,7 +197,7 @@ class HdlcDlmsParser:
 
         for index, (obj, attr_ind) in enumerate(push_setup.pushObjectList):
             self._client.updateValue(obj, attr_ind.attributeIndex, values[index])
-            LOGGER.debug("%d %s %s %s: %s", index, obj.objectType, obj.logicalName,
+            LOGGER.debug("No push list : %d %s %s %s: %s", index, obj.objectType, obj.logicalName,
                          attr_ind.attributeIndex, obj.getValues()[attr_ind.attributeIndex - 1])
         return [obj for obj, _ in push_setup.pushObjectList]
 

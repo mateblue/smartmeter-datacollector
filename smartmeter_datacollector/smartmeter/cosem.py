@@ -28,6 +28,11 @@ class RegisterCosem:
 
 
 DEFAULT_REGISTER_MAPPING = [
+#    RegisterCosem(OBISCode(0, 0, 96, 1, 0), MeterDataPointTypes.METERID.value),
+    RegisterCosem(OBISCode(0, 0, 96, 3, 0), MeterDataPointTypes.TARIF.value),
+    RegisterCosem(OBISCode(0, 1, 24, 2, 1), MeterDataPointTypes.WATER_VOLUME.value, 0.001),
+    RegisterCosem(OBISCode(0, 1, 96, 1, 0), MeterDataPointTypes.WATER_COUNTER_ID.value),
+
     RegisterCosem(OBISCode(1, 0, 1, 7, 0), MeterDataPointTypes.ACTIVE_POWER_P.value),
     RegisterCosem(OBISCode(1, 0, 2, 7, 0), MeterDataPointTypes.ACTIVE_POWER_N.value),
     RegisterCosem(OBISCode(1, 0, 3, 7, 0), MeterDataPointTypes.REACTIVE_POWER_P.value),
@@ -64,10 +69,10 @@ DEFAULT_REGISTER_MAPPING = [
     RegisterCosem(OBISCode(1, 0, 81, 7, 51), MeterDataPointTypes.ANGLE_UI_L2.value),
     RegisterCosem(OBISCode(1, 0, 81, 7, 62), MeterDataPointTypes.ANGLE_UI_L3.value),
 
-    RegisterCosem(OBISCode(1, 0, 1, 8, 0), MeterDataPointTypes.ACTIVE_ENERGY_P.value),
+    RegisterCosem(OBISCode(1, 1, 1, 8, 0), MeterDataPointTypes.ACTIVE_ENERGY_P.value),
     RegisterCosem(OBISCode(1, 0, 1, 8, 1), MeterDataPointTypes.ACTIVE_ENERGY_P_T1.value),
     RegisterCosem(OBISCode(1, 0, 1, 8, 2), MeterDataPointTypes.ACTIVE_ENERGY_P_T2.value),
-    RegisterCosem(OBISCode(1, 0, 2, 8, 0), MeterDataPointTypes.ACTIVE_ENERGY_N.value),
+    RegisterCosem(OBISCode(1, 1, 2, 8, 0), MeterDataPointTypes.ACTIVE_ENERGY_N.value),
     RegisterCosem(OBISCode(1, 0, 2, 8, 1), MeterDataPointTypes.ACTIVE_ENERGY_N_T1.value),
     RegisterCosem(OBISCode(1, 0, 2, 8, 2), MeterDataPointTypes.ACTIVE_ENERGY_N_T2.value),
     RegisterCosem(OBISCode(1, 0, 3, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_P.value),
@@ -77,19 +82,19 @@ DEFAULT_REGISTER_MAPPING = [
     RegisterCosem(OBISCode(1, 0, 4, 8, 1), MeterDataPointTypes.REACTIVE_ENERGY_N_T1.value),
     RegisterCosem(OBISCode(1, 0, 4, 8, 2), MeterDataPointTypes.REACTIVE_ENERGY_N_T2.value),
 
-    RegisterCosem(OBISCode(1, 0, 5, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q1.value),
+    RegisterCosem(OBISCode(1, 1, 5, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q1.value),
     RegisterCosem(OBISCode(1, 0, 5, 8, 1), MeterDataPointTypes.REACTIVE_ENERGY_Q1_T1.value),
     RegisterCosem(OBISCode(1, 0, 5, 8, 2), MeterDataPointTypes.REACTIVE_ENERGY_Q1_T2.value),
 
-    RegisterCosem(OBISCode(1, 0, 6, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q2.value),
+    RegisterCosem(OBISCode(1, 1, 6, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q2.value),
     RegisterCosem(OBISCode(1, 0, 6, 8, 1), MeterDataPointTypes.REACTIVE_ENERGY_Q2_T1.value),
     RegisterCosem(OBISCode(1, 0, 6, 8, 2), MeterDataPointTypes.REACTIVE_ENERGY_Q2_T2.value),
 
-    RegisterCosem(OBISCode(1, 0, 7, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q3.value),
+    RegisterCosem(OBISCode(1, 1, 7, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q3.value),
     RegisterCosem(OBISCode(1, 0, 7, 8, 1), MeterDataPointTypes.REACTIVE_ENERGY_Q3_T1.value),
     RegisterCosem(OBISCode(1, 0, 7, 8, 2), MeterDataPointTypes.REACTIVE_ENERGY_Q3_T2.value),
 
-    RegisterCosem(OBISCode(1, 0, 8, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q4.value),
+    RegisterCosem(OBISCode(1, 1, 8, 8, 0), MeterDataPointTypes.REACTIVE_ENERGY_Q4.value),
     RegisterCosem(OBISCode(1, 0, 8, 8, 1), MeterDataPointTypes.REACTIVE_ENERGY_Q4_T1.value),
     RegisterCosem(OBISCode(1, 0, 8, 8, 2), MeterDataPointTypes.REACTIVE_ENERGY_Q4_T2.value),
 ]
