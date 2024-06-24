@@ -28,8 +28,7 @@ class RegisterCosem:
 
 
 DEFAULT_REGISTER_MAPPING = [
-#    RegisterCosem(OBISCode(0, 0, 96, 1, 0), MeterDataPointTypes.METERID.value),
-    RegisterCosem(OBISCode(0, 0, 96, 3, 0), MeterDataPointTypes.TARIF.value),
+    RegisterCosem(OBISCode(0, 0, 96, 3, 0), MeterDataPointTypes.TARIFF.value),
     RegisterCosem(OBISCode(0, 1, 24, 2, 1), MeterDataPointTypes.WATER_VOLUME.value, 0.001),
     RegisterCosem(OBISCode(0, 1, 96, 1, 0), MeterDataPointTypes.WATER_COUNTER_ID.value),
 
