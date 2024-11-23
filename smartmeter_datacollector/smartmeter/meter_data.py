@@ -20,7 +20,8 @@ class MeterDataPointType:
 
 
 class MeterDataPointTypes(Enum):
-    TARIFF = MeterDataPointType("TARIFF", "Power Tarif HT / NT", "x")
+    METERID = MeterDataPointType("METERID", "Meter ID", "x")
+    TARIFF = MeterDataPointType("TARIFF", "Power Tariff HT / NT", "x")
     WATER_VOLUME = MeterDataPointType("WATER_VOLUME", "Water volume used", "m3")
     WATER_COUNTER_ID = MeterDataPointType("WATER_COUNTER_ID", "Serial ID of Water counter", "x")
 
